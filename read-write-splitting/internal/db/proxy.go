@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"gorm.io/gorm"
-	"mysql-learning/read-write-splitting/config"
+	"read-write-splitting/config"
 )
 
 // DBProxy 数据库代理，封装读写分离逻辑

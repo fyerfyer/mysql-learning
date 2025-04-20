@@ -4,10 +4,10 @@ import (
 	"log"
 	"time"
 
-	"mysql-learning/read-write-splitting/config"
-	"mysql-learning/read-write-splitting/internal/db"
-	"mysql-learning/read-write-splitting/internal/model"
-	"mysql-learning/read-write-splitting/internal/service"
+	"read-write-splitting/config"
+	"read-write-splitting/internal/db"
+	"read-write-splitting/internal/model"
+	"read-write-splitting/internal/service"
 )
 
 func main() {

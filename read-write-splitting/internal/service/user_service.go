@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"log"
 
-	"mysql-learning/read-write-splitting/internal/db"
-	"mysql-learning/read-write-splitting/internal/model"
+	"read-write-splitting/internal/db"
+	"read-write-splitting/internal/model"
 )
 
 // UserService 用户服务，处理用户相关业务逻辑

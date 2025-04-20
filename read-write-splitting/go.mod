@@ -1,6 +1,6 @@
-module mysql-learning
+module read-write-splitting
 
-go 1.23
+go 1.23.5
 
 require (
 	gorm.io/driver/mysql v1.5.7

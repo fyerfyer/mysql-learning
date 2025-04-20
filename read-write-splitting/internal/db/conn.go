@@ -9,7 +9,7 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 
-	"mysql-learning/read-write-splitting/config"
+	"read-write-splitting/config"
 )
 
 // DBPool 数据库连接池
