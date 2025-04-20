@@ -2,9 +2,9 @@ package db
 
 import (
 	"context"
+	"read-write-splitting/internal/config"
 
 	"gorm.io/gorm"
-	"read-write-splitting/config"
 )
 
 // DBProxy 数据库代理，封装读写分离逻辑

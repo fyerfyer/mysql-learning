@@ -2,9 +2,9 @@ package main
 
 import (
 	"log"
+	"read-write-splitting/internal/config"
 	"time"
 
-	"read-write-splitting/config"
 	"read-write-splitting/internal/db"
 	"read-write-splitting/internal/model"
 	"read-write-splitting/internal/service"

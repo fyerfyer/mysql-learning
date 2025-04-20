@@ -3,13 +3,12 @@ package db
 import (
 	"fmt"
 	"log"
+	"read-write-splitting/internal/config"
 	"sync/atomic"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-
-	"read-write-splitting/config"
 )
 
 // DBPool 数据库连接池

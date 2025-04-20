@@ -3,14 +3,28 @@
 ## 系统架构
 
 ```
-读写分离系统
-├── 应用层 (User Service)
-├── 代理层 (DBProxy)
-│   ├── SQL路由 (SQLRouter)
-│   └── 连接池 (DBPool)
-└── 存储层
-    ├── 主库 (写操作)
-    └── 从库 (读操作)
+┌────────────────────────┐
+│                        │
+│    应用层 (User App)    │
+│                        │
+└───────────┬────────────┘
+            │
+            ▼
+┌────────────────────────┐
+│     数据库代理层        │
+├────────────────────────┤
+│   SQL路由器 (SQLRouter) │
+├────────────────────────┤
+│   连接池 (DBPool)       │
+└───────────┬────────────┘
+            │
+      ┌─────┴─────┐
+      │           │
+      ▼           ▼
+┌─────────┐   ┌─────────┐
+│ 主库    │   │ 从库    │
+│ (写操作) │   │ (读操作) │
+└─────────┘   └─────────┘
 ```
 
 ## 核心组件
@@ -140,6 +154,47 @@ func (p *DBProxy) Transaction(fc func(tx *gorm.DB) error) error {
 }
 ```
 
+## 如何运行系统
+
+### 前提条件
+
+- Go 1.16或更高版本
+- MySQL 5.7或更高版本
+- 配置好的MySQL实例（主库和从库）
+
+### 启动步骤
+
+1. **配置系统**：
+   修改`internal/config/db_config.go`中的配置，设置主库和从库连接信息。
+
+2. **运行示例程序**：
+   ```bash
+   go run cmd/main.go
+   ```
+
+### 测试读写分离
+
+在示例程序中：
+- 查询操作将被路由到从库
+- 写入操作将被路由到主库
+- 系统会输出日志显示操作被路由到哪个数据库实例
+
+## 代码结构
+
+- `cmd/`: 应用程序入口
+  - `main.go`: 示例程序
+
+- `internal/`: 内部实现
+  - `config/`: 配置管理
+    - `db_config.go`: 数据库连接配置
+  - `db/`: 数据库操作封装
+    - `db_pool.go`: 连接池实现
+    - `sql_router.go`: SQL路由器
+    - `db_proxy.go`: 数据库代理
+
+- `model/`: 数据模型
+  - `user.go`: 示例用户模型
+
 ## 用法示例
 
 ```go
@@ -159,4 +214,10 @@ dbProxy.Find(&users)
 
 // 强制使用主库进行读操作
 dbProxy.Master().Find(&users)
+
+// 使用事务（自动路由到主库）
+dbProxy.Transaction(func(tx *gorm.DB) error {
+    user := model.NewUser("alice", "alice@example.com", "password", 30)
+    return tx.Create(user).Error
+})
 ```
