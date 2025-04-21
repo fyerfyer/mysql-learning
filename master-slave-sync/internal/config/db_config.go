@@ -64,7 +64,7 @@ func GetDefaultConfig() *SyncConfig {
 			Port:     3306,
 			User:     "root",
 			Password: "",
-			DBName:   "test_sync",
+			DBName:   "test_sync1",
 			APIPort:  8080,
 		},
 		Slave: SlaveConfig{
@@ -72,7 +72,7 @@ func GetDefaultConfig() *SyncConfig {
 			Port:       3306,
 			User:       "root",
 			Password:   "",
-			DBName:     "test_sync",
+			DBName:     "test_sync2",
 			APIPort:    8081,
 			MasterHost: "localhost",
 			MasterPort: 8080,

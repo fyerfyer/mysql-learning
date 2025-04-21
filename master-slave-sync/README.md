@@ -90,7 +90,7 @@
 ### 启动步骤
 
 1. **配置系统**：
-   默认配置使用`localhost:3306`的MySQL实例和`test_sync`数据库。如果需要，可以修改`config.go`中的配置。
+   默认配置使用`localhost:3306`的MySQL实例和`test_sync1`、`test_sync2`数据库。如果需要，可以修改`config.go`中的配置。
 
 2. **启动主节点**：
    ```bash
